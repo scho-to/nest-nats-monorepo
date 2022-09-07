@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/http-client/src",
+  "monorepo": true,
+  "root": "apps/http-client",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/http-client/tsconfig.app.json"
+  },
+  "projects": {
+    "http-client": {
+      "type": "application",
+      "root": "apps/http-client",
+      "entryFile": "main",
+      "sourceRoot": "apps/http-client/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/http-client/tsconfig.app.json"
+      }
+    },
+    "nats-listener": {
+      "type": "application",
+      "root": "apps/nats-listener",
+      "entryFile": "main",
+      "sourceRoot": "apps/nats-listener/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/nats-listener/tsconfig.app.json"
+      }
+    },
+    "nats": {
+      "type": "library",
+      "root": "libs/nats",
+      "entryFile": "index",
+      "sourceRoot": "libs/nats/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/nats/tsconfig.lib.json"
+      }
+    }
+  }
+}

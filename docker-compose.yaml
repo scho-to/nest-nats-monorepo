@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  http:
+    build:
+      context: ./
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - nats-server
+  nats-listener:
+    build:
+      context: ./
+      target: dev
+    command: npm run start:dev nats-listener
+    volumes:
+      - ./:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - nats-server
+  nats-server:
+    image: bitnami/nats:2
+    command: nats-server --js -m 8222 -p 4222
+    env_file:
+      - ./.env
+    ports:
+      - 4222:4222
+      - 6222:6222
+      - 8222:8222
